@@ -60,7 +60,16 @@
       background: rgba(255, 255, 255, 0.08);
     }
 
-    [data-theme="dark"] .page-hero__title {
+    [data-theme="dark"] .page-hero::after {
+      color: var(--white);
+      opacity: 0.1;
+    }
+
+    [data-theme="dark"] .nav-overlay__link {
+      color: var(--white);
+    }
+
+    [data-theme="dark"] .nav-overlay__link:hover {
       color: #ffffff;
     }
 
@@ -279,7 +288,7 @@
       font-family: 'Oswald', sans-serif;
       font-size: clamp(6rem, 16vw, 14rem);
       font-weight: 700;
-      color: white;
+      color: var(--white);
       opacity: 0.04;
       line-height: 1;
       user-select: none;

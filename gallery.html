@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — Anthony Leuterio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Barlow:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --red: #CC2200;
+      --white: #ffffff;
+      --dark: #111111;
+      --light: #f5f5f3;
+    }
+
+    html,
+    body {
+      width: 100%;
+      background: var(--white);
+      color: var(--dark);
+      font-family: 'Barlow', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 4vw;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      transition: box-shadow 0.3s;
+    }
+
+    .nav__logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav__logo span {
+      color: var(--red);
+    }
+
+    .nav__hamburger {
+      width: 44px;
+      height: 44px;
+      background: var(--red);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: white;
+    }
+
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--red);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 3rem;
+      transform: translateX(-100%);
+      transition: transform 0.5s cubic-bezier(.77, 0, .18, 1);
+    }
+
+    .nav-overlay.open {
+      transform: translateX(0);
+    }
+
+    .nav-overlay__top {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .nav-overlay__close-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      font-family: 'Barlow', sans-serif;
+    }
+
+    .nav-overlay__close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-overlay__close svg {
+      width: 32px;
+      height: 32px;
+      stroke: white;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .nav-overlay__links {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .nav-overlay__link {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.8rem, 5.5vw, 4rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: white;
+      text-decoration: none;
+      line-height: 1.15;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 0.25em 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: color 0.2s, padding-left 0.3s;
+    }
+
+    .nav-overlay__link:last-child {
+      border-bottom: none;
+    }
+
+    .nav-overlay__link:hover,
+    .nav-overlay__link.active {
+      color: var(--dark);
+    }
+
+    .nav-overlay__link .arrow {
+      font-size: 0.4em;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .nav-overlay__link:hover .arrow {
+      opacity: 1;
+    }
+
+    /* PAGE HERO */
+    .page-hero {
+      margin-top: 68px;
+      background: var(--dark);
+      padding: 5rem 6vw 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::after {
+      content: 'GALLERY';
+      position: absolute;
+      right: -0.05em;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(6rem, 16vw, 14rem);
+      font-weight: 700;
+      color: white;
+      opacity: 0.04;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .page-hero__eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .page-hero__eyebrow::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 2px;
+      background: var(--red);
+    }
+
+    .page-hero__title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(3rem, 9vw, 7rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 0.9;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+
+    .page-hero__title em {
+      color: var(--red);
+      font-style: normal;
+      display: block;
+    }
+
+    /* FILTER TABS */
+    .gallery-filters {
+      padding: 2.5rem 6vw 0;
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.55rem 1.4rem;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: transparent;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s;
+      color: rgba(17, 17, 17, 0.5);
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: white;
+    }
+
+    /* GALLERY GRID */
+    .gallery {
+      padding: 2.5rem 6vw 6rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .gallery__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .gallery__grid--masonry {
+      grid-template-rows: masonry;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--light);
+    }
+
+    .gallery-item:nth-child(3n+1) {
+      grid-row: span 2;
+    }
+
+    .gallery-item__img {
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+      display: block;
+      transition: transform 0.6s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .gallery-item:nth-child(3n+1) .gallery-item__img {
+      min-height: 460px;
+    }
+
+    .gallery-item:hover .gallery-item__img {
+      transform: scale(1.06);
+    }
+
+    .gallery-item__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+    }
+
+    .gallery-item:hover .gallery-item__overlay {
+      opacity: 1;
+    }
+
+    .gallery-item__tag {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: white;
+      display: inline-block;
+      padding: 0.25em 0.6em;
+      margin-bottom: 0.5rem;
+      align-self: flex-start;
+    }
+
+    .gallery-item__caption {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    /* Placeholder colors for gallery items */
+    .gi-1 {
+      background: url('img/anthony.jpg') center/cover no-repeat;
+    }
+
+    .gi-2 {
+      background: url('img/anthony.jpg') center/cover no-repeat;
+    }
+
+    .gi-3 {
+      background: url('img/anthony.jpg') center/cover no-repeat;
+    }
+
+    .gi-4 {
+      background: url('img/anthony.jpg') center/cover no-repeat;
+    }
+
+    .gi-5 {
+      background: url('img/anthony.jpg') center/cover no-repeat;
+    }
+
+    .gi-6 {
+      background: url('img/anthony.jpg') center/cover no-repeat;
+    }
+
+    .gi-7 {
+      background: url('img/anthony.jpg') center/cover no-repeat;
+    }
+
+    .gi-8 {
+      background: url('img/anthony.jpg') center/cover no-repeat;
+    }
+
+    .gi-9 {
+      background: url('img/anthony.jpg') center/cover no-repeat;
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox__close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .lightbox__img {
+      max-width: 80vw;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+
+    .lightbox__caption {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    /* AOS */
+    [data-aos] {
+      opacity: 0;
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    [data-aos="fade-up"] {
+      transform: translateY(40px);
+    }
+
+    [data-aos="zoom-in"] {
+      transform: scale(0.92);
+    }
+
+    [data-aos].aos-animate {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    [data-delay="100"] {
+      transition-delay: 0.1s;
+    }
+
+    [data-delay="200"] {
+      transition-delay: 0.2s;
+    }
+
+    [data-delay="300"] {
+      transition-delay: 0.3s;
+    }
+
+    [data-delay="400"] {
+      transition-delay: 0.4s;
+    }
+
+    .footer {
+      background: #0a0a0a;
+      padding: 2rem 6vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer__logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .footer__logo span {
+      color: var(--red);
+    }
+
+    .footer__copy {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    @media(max-width:768px) {
+      .gallery__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-item:nth-child(3n+1) {
+        grid-row: span 1;
+      }
+
+      .gallery-item__img {
+        min-height: 180px !important;
+      }
+    }
+
+    @media(max-width:480px) {
+      .gallery__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="nav-overlay" id="navOverlay">
+    <div class="nav-overlay__top">
+      <span class="nav-overlay__close-label">CLOSE</span>
+      <button class="nav-overlay__close" id="navClose"><svg viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg></button>
+    </div>
+    <nav class="nav-overlay__links">
+      <a href="anthony_leuterio.html" class="nav-overlay__link">Home <span class="arrow">&#8594;</span></a>
+      <a href="about.html" class="nav-overlay__link">About <span class="arrow">&#8594;</span></a>
+      <a href="gallery.html" class="nav-overlay__link active">Gallery <span class="arrow">&#8594;</span></a>
+      <a href="news.html" class="nav-overlay__link">News <span class="arrow">&#8594;</span></a>
+      <a href="anthony_leuterio.html#contact" class="nav-overlay__link">Contact Me <span
+          class="arrow">&#8594;</span></a>
+    </nav>
+  </div>
+
+  <header class="nav" id="mainNav">
+    <a href="anthony_leuterio.html" class="nav__logo">A<span>L</span></a>
+    <button class="nav__hamburger" id="navOpen"><span></span><span></span><span></span></button>
+  </header>
+
+  <section class="page-hero">
+    <p class="page-hero__eyebrow">Visual Stories</p>
+    <h1 class="page-hero__title">Photo<em>Gallery</em></h1>
+  </section>
+
+  <div class="gallery-filters" data-aos="fade-up">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Events</button>
+    <button class="filter-btn">Speaking</button>
+    <button class="filter-btn">Awards</button>
+    <button class="filter-btn">Real Estate</button>
+  </div>
+
+  <div class="gallery">
+    <div class="gallery__grid">
+
+      <div class="gallery-item" data-aos="zoom-in" data-delay="0">
+        <div class="gallery-item__img gi-1"></div>
+        <div class="gallery-item__overlay">
+          <span class="gallery-item__tag">Events</span>
+          <p class="gallery-item__caption">FilipinoHomes Real Estate Summit 2023</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-aos="zoom-in" data-delay="100">
+        <div class="gallery-item__img gi-2"></div>
+        <div class="gallery-item__overlay">
+          <span class="gallery-item__tag">Speaking</span>
+          <p class="gallery-item__caption">ASEAN PropTech Conference</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-aos="zoom-in" data-delay="200">
+        <div class="gallery-item__img gi-3"></div>
+        <div class="gallery-item__overlay">
+          <span class="gallery-item__tag">Awards</span>
+          <p class="gallery-item__caption">Most Outstanding Broker 2023</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-aos="zoom-in" data-delay="100">
+        <div class="gallery-item__img gi-4"></div>
+        <div class="gallery-item__overlay">
+          <span class="gallery-item__tag">Real Estate</span>
+          <p class="gallery-item__caption">Property Launch — Cebu City</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-aos="zoom-in" data-delay="200">
+        <div class="gallery-item__img gi-5"></div>
+        <div class="gallery-item__overlay">
+          <span class="gallery-item__tag">Events</span>
+          <p class="gallery-item__caption">Bangkok Real Estate Summit</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-aos="zoom-in" data-delay="300">
+        <div class="gallery-item__img gi-6"></div>
+        <div class="gallery-item__overlay">
+          <span class="gallery-item__tag">Speaking</span>
+          <p class="gallery-item__caption">Motivational Talk — Manila 2022</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-aos="zoom-in" data-delay="0">
+        <div class="gallery-item__img gi-7"></div>
+        <div class="gallery-item__overlay">
+          <span class="gallery-item__tag">Awards</span>
+          <p class="gallery-item__caption">Asia CEO Awards Night</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-aos="zoom-in" data-delay="100">
+        <div class="gallery-item__img gi-8"></div>
+        <div class="gallery-item__overlay">
+          <span class="gallery-item__tag">Real Estate</span>
+          <p class="gallery-item__caption">Leuterio Realty Team Building</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-aos="zoom-in" data-delay="200">
+        <div class="gallery-item__img gi-9"></div>
+        <div class="gallery-item__overlay">
+          <span class="gallery-item__tag">Events</span>
+          <p class="gallery-item__caption">OFW Real Estate Forum</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="footer">
+    <span class="footer__logo">A<span>L</span></span>
+    <span class="footer__copy">&copy; 2024 Anthony Leuterio. All rights reserved.</span>
+  </footer>
+
+  <script>
+    const overlay = document.getElementById('navOverlay');
+    document.getElementById('navOpen').addEventListener('click', () => overlay.classList.add('open'));
+    document.getElementById('navClose').addEventListener('click', () => overlay.classList.remove('open'));
+    overlay.querySelectorAll('.nav-overlay__link').forEach(l => l.addEventListener('click', () => overlay.classList.remove('open')));
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => { nav.style.boxShadow = window.scrollY > 20 ? '0 4px 20px rgba(0,0,0,0.1)' : 'none'; });
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('aos-animate'), parseInt(e.target.dataset.delay || 0)); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-aos]').forEach(el => obs.observe(el));
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => { document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); });
+    });
+  </script>
+</body>
+
+</html>

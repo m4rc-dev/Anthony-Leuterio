@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Anthony Leuterio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Barlow:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --red: #CC2200;
+      --white: #ffffff;
+      --dark: #111111;
+      --light: #f5f5f3;
+    }
+
+    html,
+    body {
+      width: 100%;
+      background: var(--white);
+      color: var(--dark);
+      font-family: 'Barlow', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 4vw;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      transition: box-shadow 0.3s;
+    }
+
+    .nav__logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav__logo span {
+      color: var(--red);
+    }
+
+    .nav__hamburger {
+      width: 44px;
+      height: 44px;
+      background: var(--red);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: white;
+    }
+
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--red);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 3rem;
+      transform: translateX(-100%);
+      transition: transform 0.5s cubic-bezier(.77, 0, .18, 1);
+    }
+
+    .nav-overlay.open {
+      transform: translateX(0);
+    }
+
+    .nav-overlay__top {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .nav-overlay__close-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      font-family: 'Barlow', sans-serif;
+    }
+
+    .nav-overlay__close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-overlay__close svg {
+      width: 32px;
+      height: 32px;
+      stroke: white;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .nav-overlay__links {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .nav-overlay__link {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.8rem, 5.5vw, 4rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: white;
+      text-decoration: none;
+      line-height: 1.15;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 0.25em 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: color 0.2s, padding-left 0.3s;
+    }
+
+    .nav-overlay__link:last-child {
+      border-bottom: none;
+    }
+
+    .nav-overlay__link:hover {
+      color: var(--dark);
+      padding-left: 0.15em;
+    }
+
+    .nav-overlay__link.active {
+      color: var(--dark);
+    }
+
+    .nav-overlay__link .arrow {
+      font-size: 0.4em;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .nav-overlay__link:hover .arrow {
+      opacity: 1;
+    }
+
+    /* PAGE HERO */
+    .page-hero {
+      margin-top: 68px;
+      background: var(--dark);
+      padding: 5rem 6vw 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::after {
+      content: 'ABOUT';
+      position: absolute;
+      right: -0.05em;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(6rem, 16vw, 14rem);
+      font-weight: 700;
+      color: white;
+      opacity: 0.04;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .page-hero__eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .page-hero__eyebrow::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 2px;
+      background: var(--red);
+    }
+
+    .page-hero__title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(3rem, 9vw, 7rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 0.9;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+
+    .page-hero__title em {
+      color: var(--red);
+      font-style: normal;
+      display: block;
+    }
+
+    /* ABOUT CONTENT */
+    .about-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      padding: 6rem 6vw;
+      max-width: 1300px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .about-intro__img {
+      position: relative;
+    }
+
+    .about-intro__img-box {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: url('img/anthony.jpg') center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-intro__img-box::after {
+      content: 'FILIPINOHOMES.COM';
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .about-intro__img-accent {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      width: 80%;
+      height: 80%;
+      border: 4px solid var(--red);
+      z-index: -1;
+    }
+
+    .about-intro__content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    .about-intro__eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .about-intro__eyebrow::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 2px;
+      background: var(--red);
+    }
+
+    .about-intro__name {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 0.95;
+      color: var(--dark);
+      letter-spacing: -0.02em;
+    }
+
+    .about-intro__text {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: rgba(17, 17, 17, 0.6);
+    }
+
+    .about-intro__text p+p {
+      margin-top: 1rem;
+    }
+
+    .about-intro__stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .about-stat__num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--red);
+      line-height: 1;
+    }
+
+    .about-stat__label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(17, 17, 17, 0.45);
+      margin-top: 0.3rem;
+    }
+
+    /* TIMELINE */
+    .timeline {
+      padding: 6rem 6vw;
+      background: var(--light);
+    }
+
+    .timeline__intro {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .timeline__eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.8rem;
+    }
+
+    .timeline__heading {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--dark);
+    }
+
+    .timeline__heading em {
+      color: var(--red);
+      font-style: normal;
+    }
+
+    .timeline__items {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline__items::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--red), rgba(204, 34, 0, 0.1));
+    }
+
+    .timeline__item {
+      padding: 0 0 3rem 2.5rem;
+      position: relative;
+    }
+
+    .timeline__item::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      background: var(--red);
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--red);
+    }
+
+    .timeline__year {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--red);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline__title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline__desc {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: rgba(17, 17, 17, 0.55);
+    }
+
+    /* SKILLS */
+    .skills {
+      padding: 6rem 6vw;
+      background: var(--white);
+    }
+
+    .skills__intro {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .skills__eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.8rem;
+    }
+
+    .skills__heading {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--dark);
+    }
+
+    .skills__heading em {
+      color: var(--red);
+      font-style: normal;
+    }
+
+    .skills__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .skill-item__label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .skill-item__bar {
+      height: 4px;
+      background: rgba(0, 0, 0, 0.08);
+      position: relative;
+    }
+
+    .skill-item__fill {
+      height: 100%;
+      background: var(--red);
+      width: 0;
+      transition: width 1.2s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .skill-item__fill.animate {
+      width: var(--w);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #0a0a0a;
+      padding: 2rem 6vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer__logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .footer__logo span {
+      color: var(--red);
+    }
+
+    .footer__copy {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* AOS */
+    [data-aos] {
+      opacity: 0;
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    [data-aos="fade-up"] {
+      transform: translateY(50px);
+    }
+
+    [data-aos="fade-right"] {
+      transform: translateX(-50px);
+    }
+
+    [data-aos="fade-left"] {
+      transform: translateX(50px);
+    }
+
+    [data-aos].aos-animate {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    [data-delay="100"] {
+      transition-delay: 0.1s;
+    }
+
+    [data-delay="200"] {
+      transition-delay: 0.2s;
+    }
+
+    [data-delay="300"] {
+      transition-delay: 0.3s;
+    }
+
+    @media(max-width:900px) {
+      .about-intro {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .about-intro__img-accent {
+        display: none;
+      }
+
+      .skills__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="nav-overlay" id="navOverlay">
+    <div class="nav-overlay__top">
+      <span class="nav-overlay__close-label">CLOSE</span>
+      <button class="nav-overlay__close" id="navClose"><svg viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg></button>
+    </div>
+    <nav class="nav-overlay__links">
+      <a href="anthony_leuterio.html" class="nav-overlay__link">Home <span class="arrow">&#8594;</span></a>
+      <a href="about.html" class="nav-overlay__link active">About <span class="arrow">&#8594;</span></a>
+      <a href="gallery.html" class="nav-overlay__link">Gallery <span class="arrow">&#8594;</span></a>
+      <a href="news.html" class="nav-overlay__link">News <span class="arrow">&#8594;</span></a>
+      <a href="anthony_leuterio.html#contact" class="nav-overlay__link">Contact Me <span
+          class="arrow">&#8594;</span></a>
+    </nav>
+  </div>
+
+  <header class="nav" id="mainNav">
+    <a href="anthony_leuterio.html" class="nav__logo">A<span>L</span></a>
+    <button class="nav__hamburger" id="navOpen"><span></span><span></span><span></span></button>
+  </header>
+
+  <section class="page-hero">
+    <p class="page-hero__eyebrow">Who I Am</p>
+    <h1 class="page-hero__title">Anthony<em>Leuterio</em></h1>
+  </section>
+
+  <!-- INTRO -->
+  <div class="about-intro">
+    <div class="about-intro__img" data-aos="fade-right">
+      <div class="about-intro__img-box"></div>
+      <div class="about-intro__img-accent"></div>
+    </div>
+    <div class="about-intro__content" data-aos="fade-left">
+      <p class="about-intro__eyebrow">About</p>
+      <h2 class="about-intro__name">Anthony<br>Leuterio</h2>
+      <div class="about-intro__text">
+        <p>His natural charismatic personality and wit to maximize different effective channels in marketing and selling
+          brought this man-of-the-hour in real estate sector in the Philippines to the top.</p>
+        <p>Anthony Gerard Orais Leuterio, the president and founder of several companies under the Leuterio Realty &amp;
+          Brokerage Group has made real estate in the Philippines more prominent and much attractive to buyers. His
+          out-of-the-box innovations in property selling reach to broader spectrum of real estate buyers around the
+          world utilizing the social media and other online channels.</p>
+        <p>Doing only what he loves to do, Mr. Leuterio took the world of real estate industry by surprise, as award
+          giving bodies accorded several awards to his exemplary initiatives since he decided to enter into real estate
+          business.</p>
+        <p>He has been a recipient of over 1,000 awards and accolades. He is the first E-pro Certified Broker in the
+          Philippines certified by National Association of Realtors.</p>
+        <p>One of his brainchild innovations is the establishment of the biggest rental website called Rent.ph, which is
+          now helping millions of customers needing for rent properties, as well as property owners offering rental
+          services.</p>
+        <p>Leuterio has inspired many individuals and has helped change the lives of many real estate brokers and
+          agents. To date, his little brokerage empire is giving livelihood to nearly 15,000 people all over the
+          country.</p>
+        <p>From a small office in Cebu City, Mr. Leuterio's inspirational social media prowess and charismatic
+          leadership have been instrumental in opening offices in Mandaue City, Talisay City, Lapulapu City and even in
+          Manila, Camsur, Legaspi, Cavite, Laguna, Bohol, Iligan, Cagayan de Oro, Davao, General Santos City, Butuan,
+          Bacolod, Iloilo, Roxas, Dumaguete, Catbalogan, Calbayog and Ormoc.</p>
+      </div>
+      <div class="about-intro__stats">
+        <div>
+          <div class="about-stat__num">1,000+</div>
+          <div class="about-stat__label">Awards &amp; Accolades</div>
+        </div>
+        <div>
+          <div class="about-stat__num">15,000</div>
+          <div class="about-stat__label">People Employed</div>
+        </div>
+        <div>
+          <div class="about-stat__num">20+</div>
+          <div class="about-stat__label">Cities Nationwide</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <section class="timeline">
+    <div class="timeline__intro" data-aos="fade-up">
+      <p class="timeline__eyebrow">Journey</p>
+      <h2 class="timeline__heading">Career <em>Milestones</em></h2>
+    </div>
+    <div class="timeline__items">
+      <div class="timeline__item" data-aos="fade-up" data-delay="0">
+        <p class="timeline__year">2005</p>
+        <h3 class="timeline__title">Started in Real Estate</h3>
+        <p class="timeline__desc">Began his career as a real estate salesperson in Cebu City, quickly rising through the
+          ranks with his innovative marketing approach.</p>
+      </div>
+      <div class="timeline__item" data-aos="fade-up" data-delay="100">
+        <p class="timeline__year">2008</p>
+        <h3 class="timeline__title">Founded Leuterio Realty &amp; Brokerage</h3>
+        <p class="timeline__desc">Established his own real estate brokerage firm, which would grow into one of the
+          fastest-growing brands in Philippine real estate.</p>
+      </div>
+      <div class="timeline__item" data-aos="fade-up" data-delay="200">
+        <p class="timeline__year">2012</p>
+        <h3 class="timeline__title">Launched FilipinoHomes.com</h3>
+        <p class="timeline__desc">Pioneered online property listings in the Philippines, making real estate accessible
+          to OFWs and Filipinos worldwide through digital innovation.</p>
+      </div>
+      <div class="timeline__item" data-aos="fade-up" data-delay="300">
+        <p class="timeline__year">2016</p>
+        <h3 class="timeline__title">Founded Rent.ph</h3>
+        <p class="timeline__desc">Launched a dedicated nationwide rental property platform, serving renters, property
+          managers, and real estate owners across the Philippines.</p>
+      </div>
+      <div class="timeline__item" data-aos="fade-up" data-delay="100">
+        <p class="timeline__year">2020</p>
+        <h3 class="timeline__title">ASEAN Real Estate Expansion</h3>
+        <p class="timeline__desc">Expanded his influence across Southeast Asia, representing Philippine real estate at
+          international summits and PropTech conferences.</p>
+      </div>
+      <div class="timeline__item" data-aos="fade-up" data-delay="200">
+        <p class="timeline__year">2023</p>
+        <h3 class="timeline__title">Most Outstanding Real Estate Broker</h3>
+        <p class="timeline__desc">Recognized as the Most Outstanding Real Estate Broker of the Year at the Philippine
+          Real Estate Awards — the pinnacle of a two-decade career.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span class="footer__logo">A<span>L</span></span>
+    <span class="footer__copy">&copy; 2024 Anthony Leuterio. All rights reserved.</span>
+  </footer>
+
+  <script>
+    const overlay = document.getElementById('navOverlay');
+    document.getElementById('navOpen').addEventListener('click', () => overlay.classList.add('open'));
+    document.getElementById('navClose').addEventListener('click', () => overlay.classList.remove('open'));
+    overlay.querySelectorAll('.nav-overlay__link').forEach(l => l.addEventListener('click', () => overlay.classList.remove('open')));
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => { nav.style.boxShadow = window.scrollY > 20 ? '0 4px 20px rgba(0,0,0,0.1)' : 'none'; });
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('aos-animate'), parseInt(e.target.dataset.delay || 0));
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-aos]').forEach(el => obs.observe(el));
+    // Skill bars
+    const skillObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.querySelector('.skill-item__fill').classList.add('animate'); skillObs.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.skill-item').forEach(el => skillObs.observe(el));
+  </script>
+</body>
+
+</html>

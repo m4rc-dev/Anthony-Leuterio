@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anthony Leuterio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Barlow:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --red: #CC2200;
+      --white: #ffffff;
+      --dark: #111111;
+      --light: #f5f5f3;
+    }
+
+    html,
+    body {
+      width: 100%;
+      background: var(--white);
+      color: var(--dark);
+      font-family: 'Barlow', sans-serif;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      /* Firefox */
+    }
+
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+      display: none;
+      /* Chrome, Edge, Safari */
+    }
+
+    /* NAV */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 4vw;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      transition: box-shadow 0.3s;
+    }
+
+    .nav__logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav__logo span {
+      color: var(--red);
+    }
+
+    .nav__hamburger {
+      width: 44px;
+      height: 44px;
+      background: var(--red);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: white;
+    }
+
+    /* OVERLAY */
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--red);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 3rem;
+      transform: translateX(-100%);
+      transition: transform 0.5s cubic-bezier(.77, 0, .18, 1);
+    }
+
+    .nav-overlay.open {
+      transform: translateX(0);
+    }
+
+    .nav-overlay__top {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .nav-overlay__close-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      font-family: 'Barlow', sans-serif;
+    }
+
+    .nav-overlay__close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-overlay__close svg {
+      width: 32px;
+      height: 32px;
+      stroke: white;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .nav-overlay__links {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .nav-overlay__link {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.8rem, 5.5vw, 4rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: white;
+      text-decoration: none;
+      line-height: 1.15;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 0.25em 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: color 0.2s, padding-left 0.3s;
+    }
+
+    .nav-overlay__link:last-child {
+      border-bottom: none;
+    }
+
+    .nav-overlay__link:hover {
+      color: var(--dark);
+      padding-left: 0.15em;
+    }
+
+    .nav-overlay__link .arrow {
+      font-size: 0.4em;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .nav-overlay__link:hover .arrow {
+      opacity: 1;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      width: 100vw;
+      height: calc(100vh - 68px);
+      min-height: 560px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      margin-top: 68px;
+    }
+
+    .hero__photo {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 40%;
+      overflow: hidden;
+      will-change: transform;
+    }
+
+    .hero__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: contrast(1.08) brightness(1.02);
+    }
+
+
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(245, 245, 243, 0.97) 28%, rgba(245, 245, 243, 0.6) 48%, transparent 62%), linear-gradient(to top, rgba(245, 245, 243, 0.6) 5%, transparent 35%);
+    }
+
+    .hero__line {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 5px;
+      height: 100%;
+      background: var(--red);
+      opacity: 0;
+      animation: fadeIn 1s ease 1s forwards;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      padding: 0 6vw 6vh;
+      max-width: 700px;
+    }
+
+    .hero__name {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .hero__name .first {
+      font-size: clamp(4rem, 12vw, 10rem);
+      color: var(--dark);
+      display: block;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: rise 0.8s cubic-bezier(.22, 1, .36, 1) 0.1s forwards;
+    }
+
+    .hero__name .last {
+      font-size: clamp(4rem, 12vw, 10rem);
+      color: var(--red);
+      display: block;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: rise 0.8s cubic-bezier(.22, 1, .36, 1) 0.3s forwards;
+    }
+
+    .hero__tags {
+      margin-top: 1.4rem;
+      font-size: clamp(0.75rem, 1.3vw, 0.95rem);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: rgba(17, 17, 17, 0.5);
+      text-transform: uppercase;
+      opacity: 0;
+      animation: rise 0.8s cubic-bezier(.22, 1, .36, 1) 0.55s forwards;
+    }
+
+    .hero__tags span::after {
+      content: ' \2022 ';
+      color: var(--red);
+    }
+
+    .hero__tags span:last-child::after {
+      content: '';
+    }
+
+    .hero__bio {
+      position: absolute;
+      right: 5vw;
+      bottom: 8vh;
+      z-index: 2;
+      max-width: 300px;
+      font-size: clamp(0.88rem, 1.1vw, 1rem);
+      font-weight: 500;
+      line-height: 1.75;
+      color: rgba(17, 17, 17, 0.88);
+      opacity: 0;
+      animation: rise 0.8s cubic-bezier(.22, 1, .36, 1) 0.75s forwards;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.3s forwards;
+    }
+
+    .scroll-hint span {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(17, 17, 17, 0.3);
+    }
+
+    .scroll-hint__arrow {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--red), transparent);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+
+    /* SCROLL ANIMATIONS */
+    [data-aos] {
+      opacity: 0;
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    [data-aos="fade-up"] {
+      transform: translateY(60px);
+    }
+
+    [data-aos="fade-right"] {
+      transform: translateX(-60px);
+    }
+
+    [data-aos="fade-left"] {
+      transform: translateX(60px);
+    }
+
+    [data-aos="zoom-in"] {
+      transform: scale(0.85);
+    }
+
+    [data-aos="fade"] {
+      transform: none;
+    }
+
+    [data-aos].aos-animate {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    [data-delay="100"] {
+      transition-delay: 0.1s;
+    }
+
+    [data-delay="200"] {
+      transition-delay: 0.2s;
+    }
+
+    [data-delay="250"] {
+      transition-delay: 0.25s;
+    }
+
+    [data-delay="300"] {
+      transition-delay: 0.3s;
+    }
+
+    [data-delay="400"] {
+      transition-delay: 0.4s;
+    }
+
+    [data-delay="500"] {
+      transition-delay: 0.5s;
+    }
+
+    [data-delay="600"] {
+      transition-delay: 0.6s;
+    }
+
+    /* COMPANIES */
+    .companies {
+      padding: 6rem 6vw;
+      background: var(--white);
+    }
+
+    .companies__intro {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .companies__eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.8rem;
+    }
+
+    .companies__heading {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--dark);
+    }
+
+    .companies__heading em {
+      color: var(--red);
+      font-style: normal;
+    }
+
+    .companies__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .company-card {
+      background: var(--white);
+      border: 1px solid rgba(0, 0, 0, 0.09);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .company-card:hover {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .company-card--featured {
+      border-top: 4px solid var(--red);
+    }
+
+    .company-card__logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      min-height: 70px;
+    }
+
+    .company-card__logo img {
+      max-width: 100%;
+      height: auto;
+      max-height: 65px;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .logo-text__top {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: #555;
+      font-weight: 500;
+    }
+
+    .logo-text__main {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .logo-text__sub {
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: #888;
+      font-weight: 500;
+    }
+
+    .logo-text__brand {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .logo-text__tagline {
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    .logo-text__rentph {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1a3a6b;
+    }
+
+    .company-card__role {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dark);
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      padding-top: 1.2rem;
+    }
+
+    .company-card__desc {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: rgba(17, 17, 17, 0.6);
+      flex: 1;
+    }
+
+    .company-card__link {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      text-decoration: none;
+      transition: letter-spacing 0.2s;
+    }
+
+    .company-card__link:hover {
+      letter-spacing: 0.2em;
+    }
+
+    @media(max-width:900px) {
+      .companies__grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+    }
+
+    /* NEWS */
+    .news {
+      position: relative;
+      padding: 6rem 6vw;
+      background: var(--light);
+      overflow: hidden;
+    }
+
+    .news__header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .news__header-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .news__label-block {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 700;
+      color: var(--red);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      position: relative;
+    }
+
+    .news__label-block::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--red);
+    }
+
+    .news__subtitle {
+      font-size: 0.85rem;
+      color: rgba(17, 17, 17, 0.4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding-bottom: 0.3rem;
+    }
+
+    .news__view-all {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      text-decoration: none;
+      border-bottom: 1px solid var(--red);
+      padding-bottom: 2px;
+      transition: opacity 0.2s;
+    }
+
+    .news__view-all:hover {
+      opacity: 0.7;
+    }
+
+    .news__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .news-card {
+      background: var(--white);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.4s, transform 0.4s;
+      position: relative;
+    }
+
+    .news-card:hover {
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.12);
+      transform: translateY(-6px);
+    }
+
+    .news-card__img {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .news-card__img--1 {
+      background: url('img/anthony.jpg') center/cover no-repeat;
+    }
+
+    .news-card__img--2 {
+      background: url('img/anthony.jpg') center/cover no-repeat;
+    }
+
+    .news-card__img--3 {
+      background: url('img/anthony.jpg') center/cover no-repeat;
+    }
+
+    .news-card__img-tag {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--red);
+      color: white;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3em 0.7em;
+    }
+
+    .news-card__body {
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      flex: 1;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      border-top: none;
+    }
+
+    .news-card__meta {
+      font-size: 0.68rem;
+      color: rgba(17, 17, 17, 0.4);
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .news-card__meta-dot {
+      width: 3px;
+      height: 3px;
+      background: var(--red);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .news-card__title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--dark);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+
+    .news-card__excerpt {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: rgba(17, 17, 17, 0.55);
+      flex: 1;
+    }
+
+    .news-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      margin-top: auto;
+    }
+
+    .news-card__link {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+      text-decoration: none;
+      transition: letter-spacing 0.25s;
+    }
+
+    .news-card__link:hover {
+      letter-spacing: 0.24em;
+    }
+
+    .news-card__date {
+      font-size: 0.68rem;
+      color: rgba(17, 17, 17, 0.3);
+    }
+
+    @media(max-width:900px) {
+      .news__grid {
+        grid-template-columns: 1fr;
+        max-width: 540px;
+        margin: 0 auto;
+      }
+
+      .news__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    /* AWARDS */
+    .awards {
+      padding: 6rem 6vw;
+      background: var(--white);
+    }
+
+    .awards__header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .awards__header-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .awards__label-block {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 700;
+      color: var(--red);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      position: relative;
+    }
+
+    .awards__label-block::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--red);
+    }
+
+    .awards__subtitle {
+      font-size: 0.85rem;
+      color: rgba(17, 17, 17, 0.4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding-bottom: 0.3rem;
+    }
+
+    .awards__count {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      color: rgba(17, 17, 17, 0.35);
+      text-transform: uppercase;
+      padding-bottom: 0.3rem;
+    }
+
+    .awards__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .award-card {
+      background: var(--white);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 2rem 1.8rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      transition: box-shadow 0.35s, transform 0.35s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .award-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--red);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.35s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .award-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .award-card:hover {
+      box-shadow: 0 14px 45px rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .award-card__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.4rem;
+    }
+
+    .award-card__icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(204, 34, 0, 0.07);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    .award-card:hover .award-card__icon {
+      background: rgba(204, 34, 0, 0.14);
+    }
+
+    .award-card__icon svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--red);
+    }
+
+    .award-card__year {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: rgba(204, 34, 0, 0.12);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      transition: color 0.3s;
+    }
+
+    .award-card:hover .award-card__year {
+      color: rgba(204, 34, 0, 0.22);
+    }
+
+    .award-card__year-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--red);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .award-card__title {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--dark);
+      font-family: 'Barlow', sans-serif;
+    }
+
+    .award-card__org {
+      font-size: 0.78rem;
+      color: rgba(17, 17, 17, 0.4);
+      letter-spacing: 0.02em;
+      margin-top: auto;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    @media(max-width:900px) {
+      .awards__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .awards__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+    }
+
+    @media(max-width:600px) {
+      .awards__grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+    }
+
+    /* CERTIFICATES */
+    .certs {
+      padding: 6rem 6vw;
+      background: var(--light);
+    }
+
+    .certs__intro {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .certs__eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.8rem;
+    }
+
+    .certs__heading {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--dark);
+    }
+
+    .certs__heading em {
+      color: var(--red);
+      font-style: normal;
+    }
+
+    .certs__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .cert-card {
+      background: var(--white);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .cert-card:hover {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.09);
+      transform: translateY(-4px);
+    }
+
+    .cert-card__badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f5f0e8, #e8dfc8);
+      border: 2px solid rgba(204, 34, 0, 0.2);
+    }
+
+    .cert-card__badge svg {
+      width: 30px;
+      height: 30px;
+      fill: #b8860b;
+    }
+
+    .cert-card__name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--dark);
+    }
+
+    .cert-card__issuer {
+      font-size: 0.75rem;
+      color: rgba(17, 17, 17, 0.45);
+    }
+
+    .cert-card__year {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--red);
+      font-weight: 700;
+      margin-top: auto;
+    }
+
+    @media(max-width:900px) {
+      .certs__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width:500px) {
+      .certs__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* CONTACT */
+    .contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 600px;
+    }
+
+    .contact__info {
+      background: var(--dark);
+      padding: 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    .contact__eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    .contact__heading {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1.05;
+      color: var(--white);
+    }
+
+    .contact__heading em {
+      color: var(--red);
+      font-style: normal;
+    }
+
+    .contact__desc {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .contact__details {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .contact__item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact__item-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(204, 34, 0, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact__item-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--red);
+    }
+
+    .contact__item-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.3);
+      margin-bottom: 2px;
+    }
+
+    .contact__item-text {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .contact__socials {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .social-btn {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.25s, border-color 0.25s;
+      text-decoration: none;
+    }
+
+    .social-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: rgba(255, 255, 255, 0.5);
+      transition: fill 0.25s;
+    }
+
+    .social-btn:hover {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    .social-btn:hover svg {
+      fill: white;
+    }
+
+    .contact__form {
+      background: var(--white);
+      padding: 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.4rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(17, 17, 17, 0.45);
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: var(--light);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.9rem;
+      color: var(--dark);
+      outline: none;
+      transition: border-color 0.25s;
+      resize: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--red);
+    }
+
+    .form-group textarea {
+      height: 130px;
+    }
+
+    .form__submit {
+      align-self: flex-start;
+      padding: 0.9rem 2.8rem;
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+
+    .form__submit:hover {
+      background: #a81b00;
+    }
+
+    @media(max-width:860px) {
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .contact__info,
+      .contact__form {
+        padding: 4rem 6vw;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #0a0a0a;
+      padding: 2rem 6vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer__logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .footer__logo span {
+      color: var(--red);
+    }
+
+    .footer__copy {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    @keyframes rise {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 0.3;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV OVERLAY -->
+  <div class="nav-overlay" id="navOverlay">
+    <div class="nav-overlay__top">
+      <span class="nav-overlay__close-label">CLOSE</span>
+      <button class="nav-overlay__close" id="navClose">
+        <svg viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+    <nav class="nav-overlay__links">
+      <a href="anthony_leuterio.html" class="nav-overlay__link">Home <span class="arrow">&#8594;</span></a>
+      <a href="about.html" class="nav-overlay__link">About <span class="arrow">&#8594;</span></a>
+      <a href="gallery.html" class="nav-overlay__link">Gallery <span class="arrow">&#8594;</span></a>
+      <a href="news.html" class="nav-overlay__link">News <span class="arrow">&#8594;</span></a>
+      <a href="#contact" class="nav-overlay__link">Contact Me <span class="arrow">&#8594;</span></a>
+    </nav>
+  </div>
+
+  <!-- TOP NAV -->
+  <header class="nav" id="mainNav">
+    <a href="#" class="nav__logo">A<span>L</span></a>
+    <button class="nav__hamburger" id="navOpen">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero__photo" id="heroPhoto"><img src="img/img_1.png" alt="Anthony Leuterio"></div>
+    <div class="hero__overlay"></div>
+
+    <div class="hero__content">
+      <h1 class="hero__name">
+        <span class="first">Anthony</span>
+        <span class="last">Leuterio</span>
+      </h1>
+      <p class="hero__tags">
+        <span>Founder @ Filipinohomes</span>
+        <span>Motivational Speaker</span>
+        <span>Real Estate Influencer</span>
+        <span>Marketing Consultant</span>
+        <span>Realtor</span>
+        <span>Investor</span>
+      </p>
+    </div>
+    <p class="hero__bio">The president and founder of several companies under the Leuterio Realty &amp; Brokerage Group
+      has made real estate in the Philippines more prominent and much attractive to buyers.</p>
+    <div class="scroll-hint">
+      <div class="scroll-hint__arrow"></div><span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- COMPANIES -->
+  <section class="companies" id="companies">
+    <div class="companies__intro" data-aos="fade-up">
+      <h2 class="companies__heading">Companies &amp; <em>Ventures</em></h2>
+    </div>
+    <div class="companies__grid">
+      <div class="company-card" data-aos="fade-up" data-delay="100">
+        <div class="company-card__logo">
+          <img src="img/leutario.png" alt="Leuterio Realty">
+        </div>
+        <p class="company-card__role">Founder</p>
+        <p class="company-card__desc">Leuterio Realty &amp; Filipino Homes is the country's fastest growing brand in
+          real estate service owned and managed by Realtor Anthony "Tonton" Leuterio.</p>
+        <a href="#" class="company-card__link">Learn More &#8594;</a>
+      </div>
+      <div class="company-card company-card--featured" data-aos="fade-up" data-delay="250">
+        <div class="company-card__logo">
+          <img src="img/filipino.jpg" alt="Filipino Homes">
+        </div>
+        <p class="company-card__role">Founder</p>
+        <p class="company-card__desc">His natural charismatic personality and wit maximized different effective channels
+          in marketing and selling, bringing Philippine real estate to the top.</p>
+        <a href="#" class="company-card__link">Learn More &#8594;</a>
+      </div>
+      <div class="company-card" data-aos="fade-up" data-delay="400">
+        <div class="company-card__logo">
+          <img src="img/rentph.png" alt="Rent.ph">
+        </div>
+        <p class="company-card__role">Founder</p>
+        <p class="company-card__desc">Rent.ph is a nationwide list of properties for rent and property-related services
+          for renters, rent and property managers, agents and real estate owners.</p>
+        <a href="#" class="company-card__link">Learn More &#8594;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section class="news" id="news">
+    <div class="news__header" data-aos="fade-up">
+      <div class="news__header-left">
+        <h2 class="news__label-block">News</h2>
+        <span class="news__subtitle">Latest Updates</span>
+      </div>
+      <a href="#" class="news__view-all">View All Articles &#8594;</a>
+    </div>
+    <div class="news__grid">
+
+      <article class="news-card" data-aos="fade-up" data-delay="100">
+        <div class="news-card__img news-card__img--1">
+          <span class="news-card__img-tag">Real Estate</span>
+        </div>
+        <div class="news-card__body">
+          <p class="news-card__meta">
+            <span>anthonyleuterio</span>
+            <span class="news-card__meta-dot"></span>
+            <span>Jul 17, 2023</span>
+            <span class="news-card__meta-dot"></span>
+            <span>News &amp; Updates</span>
+          </p>
+          <h3 class="news-card__title">Bangkok real estate summit to open dollar-earning chances for Filipino dealers,
+            brokers</h3>
+          <p class="news-card__excerpt">Bangkok real estate summit opens dollar-earning chances for Filipino dealers and
+            brokers, creating new opportunities across Southeast Asia.</p>
+          <div class="news-card__footer">
+            <a href="#" class="news-card__link">Read More &#8594;</a>
+            <span class="news-card__date">Jul 17, 2023</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card" data-aos="fade-up" data-delay="250">
+        <div class="news-card__img news-card__img--2">
+          <span class="news-card__img-tag">ASEAN</span>
+        </div>
+        <div class="news-card__body">
+          <p class="news-card__meta">
+            <span>anthonyleuterio</span>
+            <span class="news-card__meta-dot"></span>
+            <span>Jul 17, 2023</span>
+            <span class="news-card__meta-dot"></span>
+            <span>News &amp; Updates</span>
+          </p>
+          <h3 class="news-card__title">ASEAN Real Estate Summit by FilipinoHomes.com</h3>
+          <p class="news-card__excerpt">Anthony Leuterio revolutionized the real estate industry through PropTech and
+            digital marketing at the ASEAN Real Estate Summit in Asia.</p>
+          <div class="news-card__footer">
+            <a href="#" class="news-card__link">Read More &#8594;</a>
+            <span class="news-card__date">Jul 17, 2023</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card" data-aos="fade-up" data-delay="400">
+        <div class="news-card__img news-card__img--3">
+          <span class="news-card__img-tag">Global</span>
+        </div>
+        <div class="news-card__body">
+          <p class="news-card__meta">
+            <span>anthonyleuterio</span>
+            <span class="news-card__meta-dot"></span>
+            <span>Jun 5, 2023</span>
+            <span class="news-card__meta-dot"></span>
+            <span>News &amp; Updates</span>
+          </p>
+          <h3 class="news-card__title">FilipinoHomes.com Expands to International Markets</h3>
+          <p class="news-card__excerpt">FilipinoHomes.com reaches OFWs worldwide, making property investment back home
+            easier and more accessible than ever before.</p>
+          <div class="news-card__footer">
+            <a href="#" class="news-card__link">Read More &#8594;</a>
+            <span class="news-card__date">Jun 5, 2023</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section class="awards" id="awards">
+    <div class="awards__header" data-aos="fade-up">
+      <div class="awards__header-left">
+        <h2 class="awards__label-block">Awards</h2>
+        <span class="awards__subtitle">Recognition &amp; Honors</span>
+      </div>
+      <span class="awards__count">6 Awards &amp; Counting</span>
+    </div>
+    <div class="awards__grid">
+
+      <div class="award-card" data-aos="fade-up" data-delay="0">
+        <div class="award-card__top">
+          <div class="award-card__icon"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <span class="award-card__year">2023</span>
+        </div>
+        <span class="award-card__year-label">2023</span>
+        <h3 class="award-card__title">Most Outstanding Real Estate Broker of the Year</h3>
+        <p class="award-card__org">Philippine Real Estate Awards</p>
+      </div>
+
+      <div class="award-card" data-aos="fade-up" data-delay="100">
+        <div class="award-card__top">
+          <div class="award-card__icon"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <span class="award-card__year">2022</span>
+        </div>
+        <span class="award-card__year-label">2022</span>
+        <h3 class="award-card__title">Top Digital Innovator in Real Estate</h3>
+        <p class="award-card__org">Asia PropTech Summit</p>
+      </div>
+
+      <div class="award-card" data-aos="fade-up" data-delay="200">
+        <div class="award-card__top">
+          <div class="award-card__icon"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <span class="award-card__year">2021</span>
+        </div>
+        <span class="award-card__year-label">2021</span>
+        <h3 class="award-card__title">Best Real Estate Brand of the Philippines</h3>
+        <p class="award-card__org">National Real Estate Honors</p>
+      </div>
+
+      <div class="award-card" data-aos="fade-up" data-delay="300">
+        <div class="award-card__top">
+          <div class="award-card__icon"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <span class="award-card__year">2020</span>
+        </div>
+        <span class="award-card__year-label">2020</span>
+        <h3 class="award-card__title">Entrepreneur of the Year — Real Estate</h3>
+        <p class="award-card__org">Asia CEO Awards</p>
+      </div>
+
+      <div class="award-card" data-aos="fade-up" data-delay="400">
+        <div class="award-card__top">
+          <div class="award-card__icon"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <span class="award-card__year">2019</span>
+        </div>
+        <span class="award-card__year-label">2019</span>
+        <h3 class="award-card__title">Top Motivational Speaker in Real Estate</h3>
+        <p class="award-card__org">Philippine Motivators Guild</p>
+      </div>
+
+      <div class="award-card" data-aos="fade-up" data-delay="500">
+        <div class="award-card__top">
+          <div class="award-card__icon"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <span class="award-card__year">2018</span>
+        </div>
+        <span class="award-card__year-label">2018</span>
+        <h3 class="award-card__title">Most Influential Real Estate Personality</h3>
+        <p class="award-card__org">Property Report PH</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section class="certs" id="certs">
+    <div class="certs__intro" data-aos="fade-up">
+      <p class="certs__eyebrow">Credentials</p>
+      <h2 class="certs__heading">Licenses &amp; <em>Certificates</em></h2>
+    </div>
+    <div class="certs__grid">
+      <div class="cert-card" data-aos="zoom-in" data-delay="0">
+        <div class="cert-card__badge"><svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
+          </svg></div>
+        <p class="cert-card__name">Licensed Real Estate Broker</p>
+        <p class="cert-card__issuer">Professional Regulation Commission</p><span class="cert-card__year">PRC
+          CERTIFIED</span>
+      </div>
+      <div class="cert-card" data-aos="zoom-in" data-delay="100">
+        <div class="cert-card__badge"><svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
+          </svg></div>
+        <p class="cert-card__name">Certified Real Estate Salesperson</p>
+        <p class="cert-card__issuer">PAREB</p><span class="cert-card__year">PAREB CERTIFIED</span>
+      </div>
+      <div class="cert-card" data-aos="zoom-in" data-delay="200">
+        <div class="cert-card__badge"><svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
+          </svg></div>
+        <p class="cert-card__name">Digital Marketing Specialist</p>
+        <p class="cert-card__issuer">Google Digital Garage</p><span class="cert-card__year">2021</span>
+      </div>
+      <div class="cert-card" data-aos="zoom-in" data-delay="300">
+        <div class="cert-card__badge"><svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
+          </svg></div>
+        <p class="cert-card__name">Accredited Real Estate Consultant</p>
+        <p class="cert-card__issuer">REBAP</p><span class="cert-card__year">REBAP ACCREDITED</span>
+      </div>
+      <div class="cert-card" data-aos="zoom-in" data-delay="100">
+        <div class="cert-card__badge"><svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
+          </svg></div>
+        <p class="cert-card__name">Social Media Marketing</p>
+        <p class="cert-card__issuer">HubSpot Academy</p><span class="cert-card__year">2022</span>
+      </div>
+      <div class="cert-card" data-aos="zoom-in" data-delay="200">
+        <div class="cert-card__badge"><svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
+          </svg></div>
+        <p class="cert-card__name">PropTech Innovation Certificate</p>
+        <p class="cert-card__issuer">ASEAN PropTech Forum</p><span class="cert-card__year">2023</span>
+      </div>
+      <div class="cert-card" data-aos="zoom-in" data-delay="300">
+        <div class="cert-card__badge"><svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
+          </svg></div>
+        <p class="cert-card__name">Entrepreneurship Leadership Program</p>
+        <p class="cert-card__issuer">Asian Institute of Management</p><span class="cert-card__year">2019</span>
+      </div>
+      <div class="cert-card" data-aos="zoom-in" data-delay="400">
+        <div class="cert-card__badge"><svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
+          </svg></div>
+        <p class="cert-card__name">Real Estate Investment Strategist</p>
+        <p class="cert-card__issuer">Philippine Real Estate Academy</p><span class="cert-card__year">2020</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact__info" data-aos="fade-right">
+      <p class="contact__eyebrow">Get In Touch</p>
+      <h2 class="contact__heading">Let's Work<br><em>Together.</em></h2>
+      <p class="contact__desc">Whether you're looking to buy, sell, invest in real estate, or book Anthony as a speaker
+        — reach out and let's make it happen.</p>
+      <div class="contact__details">
+        <div class="contact__item">
+          <div class="contact__item-icon"><svg viewBox="0 0 24 24">
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            </svg></div>
+          <div>
+            <p class="contact__item-label">Office</p>
+            <p class="contact__item-text">Cebu City, Philippines</p>
+          </div>
+        </div>
+        <div class="contact__item">
+          <div class="contact__item-icon"><svg viewBox="0 0 24 24">
+              <path
+                d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+            </svg></div>
+          <div>
+            <p class="contact__item-label">Phone</p>
+            <p class="contact__item-text">+63 (32) 123-4567</p>
+          </div>
+        </div>
+        <div class="contact__item">
+          <div class="contact__item-icon"><svg viewBox="0 0 24 24">
+              <path
+                d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+            </svg></div>
+          <div>
+            <p class="contact__item-label">Email</p>
+            <p class="contact__item-text">anthony@filipinohomes.com</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact__socials">
+        <a href="#" class="social-btn"><svg viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+          </svg></a>
+        <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)"
+            stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.5" cy="6.5" r="1" fill="rgba(255,255,255,0.5)" stroke="none" />
+          </svg></a>
+        <a href="#" class="social-btn"><svg viewBox="0 0 24 24">
+            <path
+              d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#111" />
+          </svg></a>
+        <a href="#" class="social-btn"><svg viewBox="0 0 24 24">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
+            <circle cx="4" cy="4" r="2" />
+          </svg></a>
+      </div>
+    </div>
+    <div class="contact__form" data-aos="fade-left">
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="Juan"></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="dela Cruz"></div>
+      </div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="juan@email.com"></div>
+      <div class="form-group">
+        <label>Subject</label>
+        <select>
+          <option value="" disabled selected>Select a topic...</option>
+          <option>Property Inquiry</option>
+          <option>Speaking Engagement</option>
+          <option>Partnership / Collaboration</option>
+          <option>Media &amp; Press</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Tell me how I can help you..."></textarea>
+      </div>
+      <button class="form__submit">Send Message</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" data-aos="fade-up">
+    <span class="footer__logo">A<span>L</span></span>
+    <span class="footer__copy">&copy; 2024 Anthony Leuterio. All rights reserved.</span>
+  </footer>
+
+  <script>
+    // NAV
+    const overlay = document.getElementById('navOverlay');
+    document.getElementById('navOpen').addEventListener('click', () => overlay.classList.add('open'));
+    document.getElementById('navClose').addEventListener('click', () => overlay.classList.remove('open'));
+    overlay.querySelectorAll('.nav-overlay__link').forEach(l => l.addEventListener('click', () => overlay.classList.remove('open')));
+
+    // NAV SHADOW
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => { nav.style.boxShadow = window.scrollY > 20 ? '0 4px 20px rgba(0,0,0,0.1)' : 'none'; });
+
+    // PARALLAX
+    const heroPhoto = document.getElementById('heroPhoto');
+
+
+    window.addEventListener('scroll', () => {
+      const sy = window.scrollY;
+      if (heroPhoto) heroPhoto.style.transform = 'translateY(' + (sy * 0.35) + 'px)';
+
+
+    }, { passive: true });
+
+    // SCROLL REVEAL
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const el = e.target;
+          setTimeout(() => el.classList.add('aos-animate'), parseInt(el.dataset.delay || 0));
+          obs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-aos]').forEach(el => obs.observe(el));
+  </script>
+</body>
+
+</html>

@@ -650,9 +650,7 @@
       transform: translateY(-4px);
     }
 
-    .company-card--featured {
-      border-top: 4px solid var(--red);
-    }
+
 
     .company-card__logo {
       display: flex;
@@ -1492,6 +1490,116 @@
       color: rgba(255, 255, 255, 0.3);
     }
 
+    /* ── MOBILE RESPONSIVE ── */
+    @media (max-width: 768px) {
+
+      /* HERO */
+      .hero {
+        height: auto;
+        min-height: 100vh;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .hero__photo {
+        left: 0;
+      }
+
+      .hero__overlay {
+        background:
+          linear-gradient(to top, rgba(245, 245, 243, 0.98) 35%, rgba(245, 245, 243, 0.7) 55%, transparent 80%);
+      }
+
+      [data-theme="dark"] .hero__overlay {
+        background:
+          linear-gradient(to top, rgba(17, 17, 17, 0.98) 35%, rgba(17, 17, 17, 0.7) 55%, transparent 80%);
+      }
+
+      .hero__content {
+        padding: 0 5vw 2rem;
+        max-width: 100%;
+      }
+
+      .hero__name .first,
+      .hero__name .last {
+        font-size: clamp(3rem, 14vw, 5rem);
+      }
+
+      .hero__tags {
+        font-size: 0.65rem;
+        margin-top: 1rem;
+      }
+
+      .hero__bio {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        max-width: 100%;
+        padding: 0 5vw 3rem;
+        font-size: 0.88rem;
+      }
+
+      .scroll-hint {
+        display: none;
+      }
+
+      /* NAV OVERLAY */
+      .nav-overlay {
+        padding: 3rem 2.5rem;
+      }
+
+      .nav-overlay__link {
+        font-size: clamp(2.6rem, 12vw, 4.2rem);
+        padding: 0.5em 0;
+      }
+
+      /* SECTIONS */
+      .companies {
+        padding: 4rem 5vw;
+      }
+
+      .news {
+        padding: 4rem 5vw;
+      }
+
+      /* FOOTER */
+      .footer {
+        flex-direction: column;
+        gap: 0.8rem;
+        text-align: center;
+        padding: 1.5rem 5vw;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      .hero__name .first,
+      .hero__name .last {
+        font-size: clamp(2.5rem, 16vw, 4rem);
+      }
+
+      .hero__tags span {
+        display: inline;
+      }
+
+      .companies__grid {
+        max-width: 100%;
+      }
+
+      .news__grid {
+        max-width: 100%;
+      }
+
+      .certs__grid {
+        gap: 1rem;
+      }
+
+      .contact__info,
+      .contact__form {
+        padding: 3rem 5vw;
+      }
+    }
+
     @keyframes rise {
       to {
         opacity: 1;
@@ -1602,7 +1710,7 @@
           real estate service owned and managed by Realtor Anthony "Tonton" Leuterio.</p>
         <a href="#" class="company-card__link">Learn More &#8594;</a>
       </div>
-      <div class="company-card company-card--featured" data-aos="fade-up" data-delay="250">
+      <div class="company-card" data-aos="fade-up" data-delay="250">
         <div class="company-card__logo">
           <img src="img/filipino.jpg" alt="Filipino Homes">
         </div>
@@ -1949,8 +2057,8 @@
   <script>
     // DARK MODE
     (function () {
-      const saved = localStorage.getItem('theme');
-      if (saved) document.documentElement.setAttribute('data-theme', saved);
+      const saved = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
     })();
     document.getElementById('themeToggle').addEventListener('click', () => {
       const html = document.documentElement;

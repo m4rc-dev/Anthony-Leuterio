@@ -37,12 +37,7 @@
     }
 
     [data-theme="dark"] .page-hero::after {
-      color: var(--white);
-      opacity: 0.12;
-    }
-
-    [data-theme="dark"] .page-hero__title {
-      color: var(--white);
+      opacity: 0.06;
     }
 
     [data-theme="dark"] .nav-overlay__link {
@@ -258,7 +253,7 @@
     /* PAGE HERO */
     .page-hero {
       margin-top: 68px;
-      background: var(--dark);
+      background: var(--white);
       padding: 5rem 6vw 4rem;
       position: relative;
       overflow: hidden;
@@ -273,7 +268,7 @@
       font-family: 'Oswald', sans-serif;
       font-size: clamp(6rem, 16vw, 14rem);
       font-weight: 700;
-      color: var(--white);
+      color: var(--dark);
       opacity: 0.04;
       line-height: 1;
       user-select: none;
@@ -304,7 +299,7 @@
       font-weight: 700;
       text-transform: uppercase;
       line-height: 0.9;
-      color: var(--white);
+      color: var(--dark);
       letter-spacing: -0.02em;
     }
 
@@ -587,6 +582,50 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* ── MOBILE RESPONSIVE ── */
+    @media (max-width: 768px) {
+
+      /* PAGE HERO */
+      .page-hero {
+        padding: 3.5rem 5vw 3rem;
+      }
+
+      .page-hero__title {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+      }
+
+      .page-hero::after {
+        display: none;
+      }
+
+      /* GALLERY FILTERS */
+      .gallery-filters {
+        padding: 2rem 5vw 0;
+      }
+
+      .gallery {
+        padding: 2rem 5vw 4rem;
+      }
+
+      /* NAV OVERLAY */
+      .nav-overlay {
+        padding: 3rem 2.5rem;
+      }
+
+      .nav-overlay__link {
+        font-size: clamp(2.6rem, 12vw, 4.2rem);
+        padding: 0.5em 0;
+      }
+
+      /* FOOTER */
+      .footer {
+        flex-direction: column;
+        gap: 0.8rem;
+        text-align: center;
+        padding: 1.5rem 5vw;
+      }
+    }
   </style>
 </head>
 
@@ -725,8 +764,8 @@
   <script>
     // DARK MODE
     (function () {
-      const saved = localStorage.getItem('theme');
-      if (saved) document.documentElement.setAttribute('data-theme', saved);
+      const saved = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
     })();
     document.getElementById('themeToggle').addEventListener('click', () => {
       const html = document.documentElement;

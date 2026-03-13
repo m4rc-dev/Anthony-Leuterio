@@ -20,129 +20,12 @@
 
     :root {
       --red: #CC2200;
-      --white: #ffffff;
-      --dark: #111111;
-      --light: #f5f5f3;
-    }
-
-    [data-theme="dark"] {
       --white: #111111;
       --dark: #f5f5f3;
       --light: #1a1a1a;
     }
 
-    [data-theme="dark"] .nav {
-      background: rgba(17, 17, 17, 0.96);
-      border-bottom-color: rgba(255, 255, 255, 0.06);
-    }
 
-    [data-theme="dark"] .page-hero::after {
-      opacity: 0.06;
-    }
-
-    [data-theme="dark"] .nav-overlay__link {
-      color: var(--white);
-    }
-
-    [data-theme="dark"] .nav-overlay__link:hover {
-      color: #ffffff;
-    }
-
-    [data-theme="dark"] .news-featured__img {
-      border-color: rgba(255, 255, 255, 0.06);
-    }
-
-    [data-theme="dark"] .news-card {
-      border-color: rgba(255, 255, 255, 0.07);
-    }
-
-    [data-theme="dark"] .news-card:hover {
-      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.4);
-    }
-
-    [data-theme="dark"] .news-card__meta {
-      color: rgba(245, 245, 243, 0.38);
-    }
-
-    [data-theme="dark"] .news-card__excerpt {
-      color: rgba(245, 245, 243, 0.55);
-    }
-
-    [data-theme="dark"] .news-card__footer {
-      border-top-color: rgba(255, 255, 255, 0.06);
-    }
-
-    [data-theme="dark"] .news-card__date {
-      color: rgba(245, 245, 243, 0.3);
-    }
-
-    [data-theme="dark"] .news-section__header {
-      border-bottom-color: rgba(255, 255, 255, 0.07);
-    }
-
-    [data-theme="dark"] .news-section__count {
-      color: rgba(245, 245, 243, 0.35);
-    }
-
-    [data-theme="dark"] .news-featured__body {
-      background: #111111;
-    }
-
-    [data-theme="dark"] .news-featured__title {
-      color: #ffffff;
-    }
-
-    [data-theme="dark"] .news-featured__meta {
-      color: rgba(255, 255, 255, 0.35);
-    }
-
-    [data-theme="dark"] .news-featured__excerpt {
-      color: rgba(255, 255, 255, 0.55);
-    }
-
-    /* DARK MODE TOGGLE */
-    .theme-toggle {
-      width: 40px;
-      height: 40px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      background: transparent;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color 0.3s, background 0.3s;
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--red);
-    }
-
-    .theme-toggle svg {
-      width: 18px;
-      height: 18px;
-      fill: var(--dark);
-      transition: fill 0.3s, transform 0.4s;
-    }
-
-    .theme-toggle:hover svg {
-      transform: rotate(25deg);
-    }
-
-    .theme-toggle .icon-moon {
-      display: none;
-    }
-
-    [data-theme="dark"] .theme-toggle {
-      border-color: rgba(255, 255, 255, 0.15);
-    }
-
-    [data-theme="dark"] .theme-toggle .icon-sun {
-      display: none;
-    }
-
-    [data-theme="dark"] .theme-toggle .icon-moon {
-      display: block;
-    }
 
     html,
     body {
@@ -164,9 +47,9 @@
       align-items: center;
       justify-content: space-between;
       padding: 1rem 4vw;
-      background: rgba(255, 255, 255, 0.96);
+      background: rgba(17, 17, 17, 0.96);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       transition: box-shadow 0.3s;
     }
 
@@ -182,13 +65,39 @@
       color: var(--red);
     }
 
+    .nav__links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav__link {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .nav__link:hover {
+      color: var(--red);
+      transform: translateY(-2px);
+    }
+
+    .nav__link.active {
+      color: var(--red);
+    }
+
     .nav__hamburger {
+      display: none;
       width: 44px;
       height: 44px;
       background: var(--red);
       border: none;
       cursor: pointer;
-      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -202,94 +111,13 @@
       background: white;
     }
 
-    .nav-overlay {
-      position: fixed;
-      inset: 0;
-      background: var(--red);
-      z-index: 200;
-      display: flex;
-      flex-direction: column;
-      padding: 2rem 3rem;
-      transform: translateX(-100%);
-      transition: transform 0.5s cubic-bezier(.77, 0, .18, 1);
-    }
-
-    .nav-overlay.open {
-      transform: translateX(0);
-    }
-
-    .nav-overlay__top {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
-    }
-
-    .nav-overlay__close-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.7);
-      font-family: 'Barlow', sans-serif;
-    }
-
-    .nav-overlay__close {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-    }
-
-    .nav-overlay__close svg {
-      width: 32px;
-      height: 32px;
-      stroke: white;
-      stroke-width: 2;
-      fill: none;
-    }
-
-    .nav-overlay__links {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      justify-content: center;
-    }
-
-    .nav-overlay__link {
-      font-family: 'Oswald', sans-serif;
-      font-size: clamp(1.8rem, 5.5vw, 4rem);
-      font-weight: 700;
-      text-transform: uppercase;
-      color: white;
-      text-decoration: none;
-      line-height: 1.15;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 0.25em 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: color 0.2s, padding-left 0.3s;
-    }
-
-    .nav-overlay__link:last-child {
-      border-bottom: none;
-    }
-
-    .nav-overlay__link:hover,
-    .nav-overlay__link.active {
-      color: var(--dark);
-    }
-
-    .nav-overlay__link .arrow {
-      font-size: 0.4em;
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .nav-overlay__link:hover .arrow {
-      opacity: 1;
+    @media (max-width: 768px) {
+      .nav__links {
+        display: none;
+      }
+      .nav__hamburger {
+        display: flex;
+      }
     }
 
     /* PAGE HERO */
@@ -311,7 +139,7 @@
       font-size: clamp(6rem, 18vw, 16rem);
       font-weight: 700;
       color: var(--dark);
-      opacity: 0.04;
+      opacity: 0.06;
       line-height: 1;
       user-select: none;
     }
@@ -356,9 +184,18 @@
       display: grid;
       grid-template-columns: 1.4fr 1fr;
       gap: 0;
-      max-width: 1300px;
+      max-width: 1200px;
       margin: 4rem auto;
-      padding: 0 6vw;
+      background: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      overflow: hidden;
+    }
+
+    @media (max-width: 1300px) {
+      .news-featured {
+        margin-left: 6vw;
+        margin-right: 6vw;
+      }
     }
 
     .news-featured__img {
@@ -382,7 +219,7 @@
     }
 
     .news-featured__body {
-      background: var(--dark);
+      background: var(--white);
       padding: 3.5rem;
       display: flex;
       flex-direction: column;
@@ -448,7 +285,7 @@
       justify-content: space-between;
       margin-bottom: 2.5rem;
       padding-bottom: 1rem;
-      border-bottom: 2px solid rgba(0, 0, 0, 0.07);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.07);
     }
 
     .news-section__title {
@@ -464,7 +301,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(17, 17, 17, 0.35);
+      color: rgba(245, 245, 243, 0.35);
     }
 
     .news-grid {
@@ -478,12 +315,12 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      border: 1px solid rgba(0, 0, 0, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.07);
       transition: box-shadow 0.4s, transform 0.4s;
     }
 
     .news-card:hover {
-      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.4);
       transform: translateY(-5px);
     }
 
@@ -539,7 +376,7 @@
 
     .news-card__meta {
       font-size: 0.68rem;
-      color: rgba(17, 17, 17, 0.38);
+      color: rgba(245, 245, 243, 0.38);
       display: flex;
       align-items: center;
       gap: 0.4rem;
@@ -566,7 +403,7 @@
     .news-card__excerpt {
       font-size: 0.88rem;
       line-height: 1.75;
-      color: rgba(17, 17, 17, 0.55);
+      color: rgba(245, 245, 243, 0.55);
       flex: 1;
     }
 
@@ -575,7 +412,7 @@
       align-items: center;
       justify-content: space-between;
       padding-top: 1rem;
-      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
       margin-top: auto;
     }
 
@@ -595,7 +432,7 @@
 
     .news-card__date {
       font-size: 0.68rem;
-      color: rgba(17, 17, 17, 0.3);
+      color: rgba(245, 245, 243, 0.3);
     }
 
     /* AOS */
@@ -712,15 +549,7 @@
         padding: 0 5vw 4rem;
       }
 
-      /* NAV OVERLAY */
-      .nav-overlay {
-        padding: 3rem 2.5rem;
-      }
 
-      .nav-overlay__link {
-        font-size: clamp(2.6rem, 12vw, 4.2rem);
-        padding: 0.5em 0;
-      }
 
       /* FOOTER */
       .footer {
@@ -735,38 +564,20 @@
 
 <body>
 
-  <div class="nav-overlay" id="navOverlay">
-    <div class="nav-overlay__top">
-      <span class="nav-overlay__close-label">CLOSE</span>
-      <button class="nav-overlay__close" id="navClose"><svg viewBox="0 0 24 24">
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg></button>
-    </div>
-    <nav class="nav-overlay__links">
-      <a href="index.html" class="nav-overlay__link">Home <span class="arrow">&#8594;</span></a>
-      <a href="about.html" class="nav-overlay__link">About <span class="arrow">&#8594;</span></a>
-      <a href="gallery.html" class="nav-overlay__link">Gallery <span class="arrow">&#8594;</span></a>
-      <a href="news.html" class="nav-overlay__link active">News <span class="arrow">&#8594;</span></a>
-      <a href="index.html#contact" class="nav-overlay__link">Contact Me <span class="arrow">&#8594;</span></a>
-    </nav>
-  </div>
-
   <header class="nav" id="mainNav">
     <a href="index.html" class="nav__logo">A<span>L</span></a>
-    <div style="display:flex;align-items:center;gap:0.6rem;">
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-        <svg class="icon-sun" viewBox="0 0 24 24">
-          <path
-            d="M12 3a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1Zm0 15a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1Zm9-6a1 1 0 0 1-1 1h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1ZM5 12a1 1 0 0 1-1 1H3a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1Zm14.07-5.66a1 1 0 0 1 0 1.41l-.71.71a1 1 0 1 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 0ZM7.05 17.66a1 1 0 0 1 0 1.41l-.71.71a1 1 0 1 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 0Zm12.02 2.12a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 1 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41ZM7.05 6.34a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 1 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41ZM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" />
-        </svg>
-        <svg class="icon-moon" viewBox="0 0 24 24">
-          <path
-            d="M12.1 22c-5.5 0-10-4.5-10-10 0-4.8 3.4-8.8 8.1-9.8.4-.1.8 0 1.1.3.3.3.3.7.2 1.1-.5 1.2-.7 2.5-.7 3.9 0 5.5 4.5 10 10 10 .4 0 .8 0 1.2-.1.4-.1.8 0 1.1.3.3.3.3.7.2 1.1-1.2 3.5-4.5 3.2-11.2 3.2Z" />
-        </svg>
-      </button>
-      <button class="nav__hamburger" id="navOpen"><span></span><span></span><span></span></button>
-    </div>
+    
+    <nav class="nav__links">
+      <a href="index.html" class="nav__link">Home</a>
+      <a href="about.html" class="nav__link">About</a>
+      <a href="gallery.html" class="nav__link">Gallery</a>
+      <a href="news.html" class="nav__link active">News</a>
+      <a href="index.html#contact" class="nav__link">Contact</a>
+    </nav>
+
+    <button class="nav__hamburger" id="navOpen" aria-label="Open Menu">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
   <section class="page-hero">
@@ -885,22 +696,7 @@
   </footer>
 
   <script>
-    // DARK MODE
-    (function () {
-      const saved = localStorage.getItem('theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', saved);
-    })();
-    document.getElementById('themeToggle').addEventListener('click', () => {
-      const html = document.documentElement;
-      const isDark = html.getAttribute('data-theme') === 'dark';
-      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-      localStorage.setItem('theme', isDark ? 'light' : 'dark');
-    });
 
-    const overlay = document.getElementById('navOverlay');
-    document.getElementById('navOpen').addEventListener('click', () => overlay.classList.add('open'));
-    document.getElementById('navClose').addEventListener('click', () => overlay.classList.remove('open'));
-    overlay.querySelectorAll('.nav-overlay__link').forEach(l => l.addEventListener('click', () => overlay.classList.remove('open')));
     const nav = document.getElementById('mainNav');
     window.addEventListener('scroll', () => { nav.style.boxShadow = window.scrollY > 20 ? '0 4px 20px rgba(0,0,0,0.1)' : 'none'; });
     const obs = new IntersectionObserver((entries) => {

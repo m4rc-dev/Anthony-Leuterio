@@ -20,218 +20,14 @@
 
     :root {
       --red: #CC2200;
-      --white: #ffffff;
-      --dark: #111111;
-      --light: #f5f5f3;
-    }
-
-    [data-theme="dark"] {
       --white: #111111;
       --dark: #f5f5f3;
       --light: #1a1a1a;
     }
 
-    [data-theme="dark"] .nav {
-      background: rgba(17, 17, 17, 0.96);
-      border-bottom-color: rgba(255, 255, 255, 0.06);
-    }
 
-    [data-theme="dark"] .hero__overlay {
-      background: linear-gradient(to right, rgba(17, 17, 17, 0.97) 28%, rgba(17, 17, 17, 0.6) 48%, transparent 62%),
-        linear-gradient(to top, rgba(17, 17, 17, 0.6) 5%, transparent 35%);
-    }
 
-    [data-theme="dark"] .hero__tags {
-      color: rgba(255, 255, 255, 0.5);
-    }
 
-    [data-theme="dark"] .hero__bio {
-      color: rgba(255, 255, 255, 0.85);
-    }
-
-    [data-theme="dark"] .scroll-hint span {
-      color: rgba(245, 245, 243, 0.3);
-    }
-
-    [data-theme="dark"] .company-card {
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    [data-theme="dark"] .company-card:hover {
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-    }
-
-    [data-theme="dark"] .company-card__desc {
-      color: rgba(245, 245, 243, 0.55);
-    }
-
-    [data-theme="dark"] .company-card__role {
-      border-top-color: rgba(255, 255, 255, 0.08);
-    }
-
-    [data-theme="dark"] .news-card__body {
-      border-color: rgba(255, 255, 255, 0.07);
-    }
-
-    [data-theme="dark"] .news-card__meta {
-      color: rgba(245, 245, 243, 0.4);
-    }
-
-    [data-theme="dark"] .news-card__excerpt {
-      color: rgba(245, 245, 243, 0.55);
-    }
-
-    [data-theme="dark"] .news-card__footer {
-      border-top-color: rgba(255, 255, 255, 0.06);
-    }
-
-    [data-theme="dark"] .news-card__date {
-      color: rgba(245, 245, 243, 0.3);
-    }
-
-    [data-theme="dark"] .news-card:hover {
-      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.4);
-    }
-
-    [data-theme="dark"] .news__subtitle {
-      color: rgba(245, 245, 243, 0.4);
-    }
-
-    [data-theme="dark"] .award-card {
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    [data-theme="dark"] .award-card:hover {
-      box-shadow: 0 14px 45px rgba(0, 0, 0, 0.4);
-    }
-
-    [data-theme="dark"] .award-card__org {
-      color: rgba(245, 245, 243, 0.4);
-      border-top-color: rgba(255, 255, 255, 0.06);
-    }
-
-    [data-theme="dark"] .awards__subtitle {
-      color: rgba(245, 245, 243, 0.4);
-    }
-
-    [data-theme="dark"] .awards__count {
-      color: rgba(245, 245, 243, 0.35);
-    }
-
-    [data-theme="dark"] .cert-card {
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    [data-theme="dark"] .cert-card:hover {
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-    }
-
-    [data-theme="dark"] .cert-card__badge {
-      background: linear-gradient(135deg, #2a2520, #1a1510);
-    }
-
-    [data-theme="dark"] .cert-card__issuer {
-      color: rgba(245, 245, 243, 0.45);
-    }
-
-    [data-theme="dark"] .contact__form {
-      background: #1a1a1a;
-    }
-
-    [data-theme="dark"] .contact__info {
-      background: #111111;
-      color: white;
-    }
-
-    [data-theme="dark"] .nav-overlay__link {
-      color: var(--white);
-    }
-
-    [data-theme="dark"] .nav-overlay__link:hover {
-      color: #ffffff;
-    }
-
-    [data-theme="dark"] .contact__heading {
-      color: #ffffff;
-    }
-
-    [data-theme="dark"] .contact__desc {
-      color: rgba(255, 255, 255, 0.5);
-    }
-
-    [data-theme="dark"] .contact__item-label {
-      color: rgba(255, 255, 255, 0.3);
-    }
-
-    [data-theme="dark"] .contact__item-text {
-      color: rgba(255, 255, 255, 0.65);
-    }
-
-    [data-theme="dark"] .form-group label {
-      color: rgba(245, 245, 243, 0.45);
-    }
-
-    [data-theme="dark"] .form-group input,
-    [data-theme="dark"] .form-group textarea,
-    [data-theme="dark"] .form-group select {
-      border-color: rgba(255, 255, 255, 0.12);
-      background: #222;
-      color: var(--dark);
-    }
-
-    [data-theme="dark"] .logo-text__top,
-    [data-theme="dark"] .logo-text__sub,
-    [data-theme="dark"] .logo-text__tagline {
-      color: rgba(245, 245, 243, 0.5);
-    }
-
-    [data-theme="dark"] .logo-text__rentph {
-      color: #5a8ace;
-    }
-
-    /* DARK MODE TOGGLE */
-    .theme-toggle {
-      width: 40px;
-      height: 40px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      background: transparent;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color 0.3s, background 0.3s;
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--red);
-    }
-
-    .theme-toggle svg {
-      width: 18px;
-      height: 18px;
-      fill: var(--dark);
-      transition: fill 0.3s, transform 0.4s;
-    }
-
-    .theme-toggle:hover svg {
-      transform: rotate(25deg);
-    }
-
-    .theme-toggle .icon-moon {
-      display: none;
-    }
-
-    [data-theme="dark"] .theme-toggle {
-      border-color: rgba(255, 255, 255, 0.15);
-    }
-
-    [data-theme="dark"] .theme-toggle .icon-sun {
-      display: none;
-    }
-
-    [data-theme="dark"] .theme-toggle .icon-moon {
-      display: block;
-    }
 
     html,
     body {
@@ -261,9 +57,8 @@
       align-items: center;
       justify-content: space-between;
       padding: 1rem 4vw;
-      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       transition: box-shadow 0.3s;
     }
 
@@ -280,116 +75,52 @@
       color: var(--red);
     }
 
+    .nav__links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav__link {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .nav__link:hover {
+      color: var(--red);
+      transform: translateY(-2px);
+    }
+
     .nav__hamburger {
+      display: none;
       width: 44px;
       height: 44px;
       background: var(--red);
       border: none;
       cursor: pointer;
-      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 5px;
     }
 
-    .nav__hamburger span {
-      display: block;
-      width: 20px;
-      height: 2px;
-      background: white;
+    @media (max-width: 768px) {
+      .nav__links {
+        display: none;
+      }
+
+      .nav__hamburger {
+        display: flex;
+      }
     }
 
-    /* OVERLAY */
-    .nav-overlay {
-      position: fixed;
-      inset: 0;
-      background: var(--red);
-      z-index: 200;
-      display: flex;
-      flex-direction: column;
-      padding: 2rem 3rem;
-      transform: translateX(-100%);
-      transition: transform 0.5s cubic-bezier(.77, 0, .18, 1);
-    }
 
-    .nav-overlay.open {
-      transform: translateX(0);
-    }
-
-    .nav-overlay__top {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
-    }
-
-    .nav-overlay__close-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.7);
-      font-family: 'Barlow', sans-serif;
-    }
-
-    .nav-overlay__close {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-    }
-
-    .nav-overlay__close svg {
-      width: 32px;
-      height: 32px;
-      stroke: white;
-      stroke-width: 2;
-      fill: none;
-    }
-
-    .nav-overlay__links {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      justify-content: center;
-    }
-
-    .nav-overlay__link {
-      font-family: 'Oswald', sans-serif;
-      font-size: clamp(1.8rem, 5.5vw, 4rem);
-      font-weight: 700;
-      text-transform: uppercase;
-      color: white;
-      text-decoration: none;
-      line-height: 1.15;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 0.25em 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: color 0.2s, padding-left 0.3s;
-    }
-
-    .nav-overlay__link:last-child {
-      border-bottom: none;
-    }
-
-    .nav-overlay__link:hover {
-      color: var(--dark);
-      padding-left: 0.15em;
-    }
-
-    .nav-overlay__link .arrow {
-      font-size: 0.4em;
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .nav-overlay__link:hover .arrow {
-      opacity: 1;
-    }
 
     /* HERO */
     .hero {
@@ -408,27 +139,24 @@
       top: 0;
       right: 0;
       bottom: 0;
-      left: 40%;
+      left: 0;
       overflow: hidden;
       will-change: transform;
     }
 
-    .hero__photo img {
+    .hero__photo img,
+    .hero__photo video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center top;
+      object-position: center;
       display: block;
       filter: contrast(1.08) brightness(1.02);
     }
 
 
 
-    .hero__overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, rgba(245, 245, 243, 0.97) 28%, rgba(245, 245, 243, 0.6) 48%, transparent 62%), linear-gradient(to top, rgba(245, 245, 243, 0.6) 5%, transparent 35%);
-    }
+
 
     .hero__line {
       position: absolute;
@@ -479,7 +207,7 @@
       font-size: clamp(0.75rem, 1.3vw, 0.95rem);
       font-weight: 500;
       letter-spacing: 0.06em;
-      color: rgba(17, 17, 17, 0.6);
+      color: rgba(255, 255, 255, 0.6);
       text-transform: uppercase;
       opacity: 0;
       animation: rise 0.8s cubic-bezier(.22, 1, .36, 1) 0.55s forwards;
@@ -499,11 +227,11 @@
       right: 5vw;
       bottom: 8vh;
       z-index: 2;
-      max-width: 300px;
-      font-size: clamp(0.88rem, 1.1vw, 1rem);
+      max-width: 450px;
+      font-size: clamp(1.1rem, 1.6vw, 1.4rem);
       font-weight: 500;
       line-height: 1.75;
-      color: rgba(17, 17, 17, 0.88);
+      color: rgba(255, 255, 255, 0.85);
       opacity: 0;
       animation: rise 0.8s cubic-bezier(.22, 1, .36, 1) 0.75s forwards;
     }
@@ -637,7 +365,7 @@
 
     .company-card {
       background: var(--white);
-      border: 1px solid rgba(0, 0, 0, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       padding: 2.5rem 2rem;
       display: flex;
       flex-direction: column;
@@ -646,7 +374,7 @@
     }
 
     .company-card:hover {
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
       transform: translateY(-4px);
     }
 
@@ -721,14 +449,14 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--dark);
-      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       padding-top: 1.2rem;
     }
 
     .company-card__desc {
       font-size: 0.95rem;
       line-height: 1.75;
-      color: rgba(17, 17, 17, 0.6);
+      color: rgba(245, 245, 243, 0.55);
       flex: 1;
     }
 
@@ -841,7 +569,7 @@
     }
 
     .news-card:hover {
-      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.4);
       transform: translateY(-6px);
     }
 
@@ -882,13 +610,13 @@
       flex-direction: column;
       gap: 0.8rem;
       flex: 1;
-      border: 1px solid rgba(0, 0, 0, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.07);
       border-top: none;
     }
 
     .news-card__meta {
       font-size: 0.68rem;
-      color: rgba(17, 17, 17, 0.4);
+      color: rgba(245, 245, 243, 0.4);
       letter-spacing: 0.04em;
       display: flex;
       align-items: center;
@@ -916,7 +644,7 @@
     .news-card__excerpt {
       font-size: 0.88rem;
       line-height: 1.75;
-      color: rgba(17, 17, 17, 0.55);
+      color: rgba(245, 245, 243, 0.55);
       flex: 1;
     }
 
@@ -925,7 +653,7 @@
       align-items: center;
       justify-content: space-between;
       padding-top: 1rem;
-      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
       margin-top: auto;
     }
 
@@ -1033,7 +761,7 @@
 
     .award-card {
       background: var(--white);
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       padding: 2rem 1.8rem 1.8rem;
       display: flex;
       flex-direction: column;
@@ -1061,7 +789,7 @@
     }
 
     .award-card:hover {
-      box-shadow: 0 14px 45px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 14px 45px rgba(0, 0, 0, 0.4);
       transform: translateY(-5px);
     }
 
@@ -1126,11 +854,11 @@
 
     .award-card__org {
       font-size: 0.78rem;
-      color: rgba(17, 17, 17, 0.4);
+      color: rgba(245, 245, 243, 0.4);
       letter-spacing: 0.02em;
       margin-top: auto;
       padding-top: 0.8rem;
-      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     @media(max-width:900px) {
@@ -1195,7 +923,7 @@
 
     .cert-card {
       background: var(--white);
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       padding: 2rem 1.5rem;
       display: flex;
       flex-direction: column;
@@ -1206,7 +934,7 @@
     }
 
     .cert-card:hover {
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.09);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
       transform: translateY(-4px);
     }
 
@@ -1217,7 +945,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #f5f0e8, #e8dfc8);
+      background: linear-gradient(135deg, #2a2520, #1a1510);
       border: 2px solid rgba(204, 34, 0, 0.2);
     }
 
@@ -1236,7 +964,7 @@
 
     .cert-card__issuer {
       font-size: 0.75rem;
-      color: rgba(17, 17, 17, 0.45);
+      color: rgba(245, 245, 243, 0.45);
     }
 
     .cert-card__year {
@@ -1268,7 +996,7 @@
     }
 
     .contact__info {
-      background: var(--dark);
+      background: #111111;
       padding: 5rem 4rem;
       display: flex;
       flex-direction: column;
@@ -1378,7 +1106,7 @@
     }
 
     .contact__form {
-      background: var(--white);
+      background: #1a1a1a;
       padding: 5rem 4rem;
       display: flex;
       flex-direction: column;
@@ -1402,7 +1130,7 @@
       font-size: 0.68rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(17, 17, 17, 0.45);
+      color: rgba(255, 255, 255, 0.45);
       font-weight: 600;
     }
 
@@ -1411,8 +1139,8 @@
     .form-group select {
       width: 100%;
       padding: 0.85rem 1rem;
-      border: 1px solid rgba(0, 0, 0, 0.12);
-      background: var(--light);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #222;
       font-family: 'Barlow', sans-serif;
       font-size: 0.9rem;
       color: var(--dark);
@@ -1507,11 +1235,6 @@
 
       .hero__overlay {
         background:
-          linear-gradient(to top, rgba(245, 245, 243, 0.98) 35%, rgba(245, 245, 243, 0.7) 55%, transparent 80%);
-      }
-
-      [data-theme="dark"] .hero__overlay {
-        background:
           linear-gradient(to top, rgba(17, 17, 17, 0.98) 35%, rgba(17, 17, 17, 0.7) 55%, transparent 80%);
       }
 
@@ -1543,15 +1266,7 @@
         display: none;
       }
 
-      /* NAV OVERLAY */
-      .nav-overlay {
-        padding: 3rem 2.5rem;
-      }
 
-      .nav-overlay__link {
-        font-size: clamp(2.6rem, 12vw, 4.2rem);
-        padding: 0.5em 0;
-      }
 
       /* SECTIONS */
       .companies {
@@ -1629,49 +1344,28 @@
 
 <body>
 
-  <!-- NAV OVERLAY -->
-  <div class="nav-overlay" id="navOverlay">
-    <div class="nav-overlay__top">
-      <span class="nav-overlay__close-label">CLOSE</span>
-      <button class="nav-overlay__close" id="navClose">
-        <svg viewBox="0 0 24 24">
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-      </button>
-    </div>
-    <nav class="nav-overlay__links">
-      <a href="index.html" class="nav-overlay__link">Home <span class="arrow">&#8594;</span></a>
-      <a href="about.html" class="nav-overlay__link">About <span class="arrow">&#8594;</span></a>
-      <a href="gallery.html" class="nav-overlay__link">Gallery <span class="arrow">&#8594;</span></a>
-      <a href="news.html" class="nav-overlay__link">News <span class="arrow">&#8594;</span></a>
-      <a href="#contact" class="nav-overlay__link">Contact Me <span class="arrow">&#8594;</span></a>
-    </nav>
-  </div>
-
   <!-- TOP NAV -->
   <header class="nav" id="mainNav">
     <a href="index.html" class="nav__logo">A<span>L</span></a>
-    <div style="display:flex;align-items:center;gap:0.6rem;">
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-        <svg class="icon-sun" viewBox="0 0 24 24">
-          <path
-            d="M12 3a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1Zm0 15a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1Zm9-6a1 1 0 0 1-1 1h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1ZM5 12a1 1 0 0 1-1 1H3a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1Zm14.07-5.66a1 1 0 0 1 0 1.41l-.71.71a1 1 0 1 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 0ZM7.05 17.66a1 1 0 0 1 0 1.41l-.71.71a1 1 0 1 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 0Zm12.02 2.12a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 1 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41ZM7.05 6.34a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 1 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41ZM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" />
-        </svg>
-        <svg class="icon-moon" viewBox="0 0 24 24">
-          <path
-            d="M12.1 22c-5.5 0-10-4.5-10-10 0-4.8 3.4-8.8 8.1-9.8.4-.1.8 0 1.1.3.3.3.3.7.2 1.1-.5 1.2-.7 2.5-.7 3.9 0 5.5 4.5 10 10 10 .4 0 .8 0 1.2-.1.4-.1.8 0 1.1.3.3.3.3.7.2 1.1-1.2 3.5-4.5 3.2-11.2 3.2Z" />
-        </svg>
-      </button>
-      <button class="nav__hamburger" id="navOpen">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+
+    <nav class="nav__links">
+      <a href="index.html" class="nav__link">Home</a>
+      <a href="about.html" class="nav__link">About</a>
+      <a href="gallery.html" class="nav__link">Gallery</a>
+      <a href="news.html" class="nav__link">News</a>
+      <a href="#contact" class="nav__link">Contact</a>
+    </nav>
+
+    <button class="nav__hamburger" id="navOpen" aria-label="Open Menu">
+      <span style="display:block;width:20px;height:2px;background:white;"></span>
+      <span style="display:block;width:20px;height:2px;background:white;"></span>
+      <span style="display:block;width:20px;height:2px;background:white;"></span>
+    </button>
   </header>
 
   <!-- HERO -->
   <section class="hero" id="hero">
-    <div class="hero__photo" id="heroPhoto"><img src="img/img_1.png" alt="Anthony Leuterio"></div>
+    <div class="hero__photo" id="heroPhoto"><video src="img/hero_vid.mp4" autoplay loop muted playsinline></video></div>
     <div class="hero__overlay"></div>
 
     <div class="hero__content">
@@ -2055,23 +1749,7 @@
   </footer>
 
   <script>
-    // DARK MODE
-    (function () {
-      const saved = localStorage.getItem('theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', saved);
-    })();
-    document.getElementById('themeToggle').addEventListener('click', () => {
-      const html = document.documentElement;
-      const isDark = html.getAttribute('data-theme') === 'dark';
-      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-      localStorage.setItem('theme', isDark ? 'light' : 'dark');
-    });
 
-    // NAV
-    const overlay = document.getElementById('navOverlay');
-    document.getElementById('navOpen').addEventListener('click', () => overlay.classList.add('open'));
-    document.getElementById('navClose').addEventListener('click', () => overlay.classList.remove('open'));
-    overlay.querySelectorAll('.nav-overlay__link').forEach(l => l.addEventListener('click', () => overlay.classList.remove('open')));
 
     // NAV SHADOW
     const nav = document.getElementById('mainNav');

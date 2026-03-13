@@ -4,7 +4,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About — Anthony Leuterio</title>
+  <title>About Anthony Leuterio — Visionary Leader in Real Estate</title>
+  <meta name="description" content="Discover the story, mission, and vision of Anthony Leuterio, the founder of Filipino Homes and a driving force behind the modernization of the Philippine real estate industry.">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://anthonyleuterio.com/about.html">
+  <meta property="og:title" content="About Anthony Leuterio — Visionary Leader">
+  <meta property="og:description" content="Discover the story and mission of the founder of Filipino Homes.">
+  <meta property="og:image" content="img/anthony.jpg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Barlow:wght@400;500;600&display=swap"
@@ -110,14 +119,53 @@
       width: 20px;
       height: 2px;
       background: white;
+      transition: transform 0.3s, opacity 0.3s;
     }
 
     @media (max-width: 768px) {
       .nav__links {
-        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(17, 17, 17, 0.98);
+        flex-direction: column;
+        padding: 0 2rem;
+        gap: 1.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        text-align: center;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.4s cubic-bezier(.22, 1, .36, 1);
+        pointer-events: none;
+        max-height: 0;
+        overflow: hidden;
       }
+
+      .nav.nav--open .nav__links {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        padding: 2.5rem 2rem;
+        pointer-events: all;
+        max-height: 500px;
+      }
+
       .nav__hamburger {
         display: flex;
+      }
+
+      .nav--open .nav__hamburger span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+
+      .nav--open .nav__hamburger span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .nav--open .nav__hamburger span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
       }
     }
 
@@ -716,9 +764,19 @@
   </footer>
 
   <script>
-
     const nav = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => { nav.style.boxShadow = window.scrollY > 20 ? '0 4px 20px rgba(0,0,0,0.1)' : 'none'; });
+    const navOpen = document.getElementById('navOpen');
+
+    window.addEventListener('scroll', () => {
+      nav.style.boxShadow = window.scrollY > 20 ? '0 4px 20px rgba(0,0,0,0.1)' : 'none';
+    });
+
+    if (navOpen) {
+      navOpen.addEventListener('click', () => {
+        nav.classList.toggle('nav--open');
+      });
+    }
+
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
